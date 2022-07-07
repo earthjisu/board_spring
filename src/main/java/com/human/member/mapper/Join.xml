@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.human.member.iJoin">
+<!--  <select id="listMember" resultType="com.human.member.joininfo">
+ 	select id,pwd,name,mobile,joindate from t_member
+ </select> -->
+ <select id="count" resultType="int">
+ 	select count(*) cnt from t_member where id=#{param1} and pwd=#{param2}
+ </select>
+<insert id="insert">
+ 	insert into t_member values(#{param1},#{param2},#{param3},#{param4},to_char(sysdate,'YYYY-MM-DD'))
+ </insert>
+<insert id="add">
+	insert into board values(seq1.nextval,#{param1},#{param2},#{param3},to_char(sysdate,'YYYY-MM-DD'))
+</insert>
+<select id="postlist" resultType="com.human.member.boardDTO">
+	select seqbb,title,content,writer,created from board order by seqbb
+</select>
+<delete id="delete">
+	delete from board where seqbb=#{param1}
+</delete>
+<update id="update">
+	update board set title=#{param1},content=#{param2} where seqbb=#{param3}
+</update>
+<select id="selectpost" resultType="com.human.member.boardDTO">
+	select seqbb,title,content from board where seqbb=#{param1}
+</select>
+<select id="selectview" resultType="com.human.member.boardDTO">
+	select seqbb,title,content from board where seqbb=#{param1}
+</select>
+ </mapper>
